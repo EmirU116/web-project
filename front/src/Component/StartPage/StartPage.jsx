@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import './StartPage.css';
 
 const socket = io('http://localhost:4000');
 
 export default function StartPage() {
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    socket.on('message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
+    // Assign a unique username to each client
+    const clientNumber = Math.floor(Math.random() * 1000);
+    setUsername(`Client ${clientNumber}`);
+
+    socket.on('message', (data) => {
+      setMessages((prevMessages) => [...prevMessages, data]);
     });
 
     return () => {
@@ -23,7 +29,11 @@ export default function StartPage() {
 
   function sendMessage() {
     if (inputMessage.trim() !== "") {
-      socket.send(inputMessage);
+      const messageData = {
+        username: username,
+        message: inputMessage
+      };
+      socket.emit('send_message', messageData);
       setInputMessage("");
     }
   }
@@ -33,7 +43,9 @@ export default function StartPage() {
       <div className='textDiv'>
         <div className='chat'>
           {messages.map((msg, index) => (
-            <div key={index} className='message'>{msg}</div>
+            <div key={index} className='message'>
+              <strong>{msg.username}: </strong>{msg.message}
+            </div>
           ))}
         </div>
         <input
