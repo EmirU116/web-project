@@ -1,26 +1,37 @@
-import React, { useState } from 'react'
-import './StartPage.css'
-
+import React, { useState } from 'react';
+import './StartPage.css';
 
 export default function StartPage() {
-  const [inputmessage, setinputmessage] = useState("");
+  const [inputMessage, setInputMessage] = useState("");
+  const [messages, setMessages] = useState([]);
 
-  function  messageSender(e) {
-    setinputmessage(e.target.value);
-    console.log(inputmessage);
-
-    
+  function messageSender(e) {
+    setInputMessage(e.target.value);
   }
 
+  function sendMessage() {
+    if (inputMessage.trim() !== "") {
+      setMessages([...messages, inputMessage]);
+      setInputMessage("");
+    }
+  }
 
   return (
-        <div>
-            <div className='textDiv'>
-                <div className='chat'>tset</div>
-                <input type='text' placeholder='Write message' onChange={messageSender} value={inputmessage}></input>
-                <button onClick={messageSender}>SEND </button>
-            </div>
-
+    <div>
+      <div className='textDiv'>
+        <div className='chat'>
+          {messages.map((msg, index) => (
+            <div key={index} className='message'>{msg}</div>
+          ))}
+        </div>
+        <input
+          type='text'
+          placeholder='Write message'
+          onChange={messageSender}
+          value={inputMessage}
+        />
+        <button onClick={sendMessage}>SEND</button>
+      </div>
     </div>
-  )
+  );
 }
