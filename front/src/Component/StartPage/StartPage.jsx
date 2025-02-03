@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
-import './StartPage.css';
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:4000');
 
 export default function StartPage() {
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    socket.on('message', (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+
+    return () => {
+      socket.off('message');
+    };
+  }, []);
 
   function messageSender(e) {
     setInputMessage(e.target.value);
@@ -11,7 +23,7 @@ export default function StartPage() {
 
   function sendMessage() {
     if (inputMessage.trim() !== "") {
-      setMessages([...messages, inputMessage]);
+      socket.send(inputMessage);
       setInputMessage("");
     }
   }
