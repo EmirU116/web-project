@@ -1,5 +1,7 @@
+/* variables */
+
 :root{
-    --max-rows: 6;
+    --max-rows: 6; /* grid length variable */
 }
 
 
@@ -24,7 +26,7 @@ input
 {
     background-color: lightblue;
     width: 100%;
-    height:85dvh;
+    height:80vh;
     border-radius: 14px;
     margin-bottom: 4px;
     text-align: center;
@@ -32,10 +34,7 @@ input
 }
 
 
-div
-{
-    background-color: darkcyan;
-}
+
 
 .message {
     padding: 10px;
@@ -43,12 +42,12 @@ div
     border-radius: 5px;
     background-color: #f1f1f1;
     text-align: left; /* Align text to the left for remote client */
-  }
-  
-  .message.local {
-    background-color: #d1ffd1; /* Different background color for local client */
-    text-align: right; /* Align text to the right for local client */
-  }
+}
+
+.message.local {
+background-color: #d1ffd1; /* Different background color for local client */
+text-align: right; /* Align text to the right for local client */
+}
 
 .grid-container
 {

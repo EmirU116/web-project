@@ -63,28 +63,37 @@ export default function StartPage() {
   // Render the component
   return (
     <div className='grid-container'>
-      <div className='item1'>1</div>
-      <div className='item2'>2</div>
+      <div className='item1'>1
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+      </div>
+      <div className='item2'>
+        <div className='textDiv'>
+          <div className='chat'>
+            {messages.map((msg, index) => (
+              <div key={index} className={msg.username === username ? 'message local' : 'message'}>
+                <strong>{msg.username}: </strong>{msg.message}
+              </div>
+            ))}
+          </div>
+          <input
+            type='text'
+            placeholder='Write message'
+            onKeyPress={handleKeyPress}
+            onChange={messageSender}
+            value={inputMessage}
+          />
+        </div>
+      </div>
       <div className='item3'>3</div>
       <div className='item4'>4</div>
       
-        {/* <div className='textDiv'>
-        <div className='chat'>
-          {messages.map((msg, index) => (
-            <div key={index} className={msg.username === username ? 'message local' : 'message'}>
-              <strong>{msg.username}: </strong>{msg.message}
-            </div>
-          ))}
-        </div>
-        <input
-          type='text'
-          placeholder='Write message'
-          onKeyPress={handleKeyPress}
-          onChange={messageSender}
-          value={inputMessage}
-        />
-        <button onClick={sendMessage}>SEND</button>
-      </div> */}
     </div>
   );
 }
