@@ -40,17 +40,24 @@ export default function StartPage() {
 
   // Function to send a message
   function sendMessage() {
-    if (inputMessage.trim() !== "") {
-      // Create a message object with the username and message
-      const messageData = {
-        username: username,
-        message: inputMessage
-      };
-      // Emit the message to the server
-      socket.emit('send_message', messageData);
-      // Clear the input message
-      setInputMessage("");
-    }
+      if (inputMessage.trim() !== "") {
+        // Create a message object with the username and message
+        const messageData = {
+          username: username,
+          message: inputMessage
+        };
+        // Emit the message to the server
+        socket.emit('send_message', messageData);
+        // Clear the input message
+        setInputMessage("");
+      }
+  }
+
+  function handleKeyPress(e) {
+    if(e.key === 'Enter')
+    {
+      sendMessage();
+    }    
   }
 
   // Render the component
@@ -67,6 +74,7 @@ export default function StartPage() {
         <input
           type='text'
           placeholder='Write message'
+          onKeyPress={handleKeyPress}
           onChange={messageSender}
           value={inputMessage}
         />
