@@ -2,11 +2,8 @@
 .textDiv
 {
     background-color: red;
-    display: flex, table-row;
     justify-content: center; /* Center horizontally */
     align-items: flex-end; /* Align input to the bottom */
-    height: 90dvh; /* Adjust height as needed */
-    width: 150dvh;
     border: 1px solid black; /* Just to visualize the div */
     padding: 10px; /* Optional: Add spacing from the bottom */
 }
@@ -48,3 +45,52 @@ div
     background-color: #d1ffd1; /* Different background color for local client */
     text-align: right; /* Align text to the right for local client */
   }
+
+.grid-container
+{
+    display: grid;
+    grid-template-columns: 200px auto 180px;
+    gap: 10px;
+    background-color: #2196F3;
+    padding: 10px;
+}
+.grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.item1
+{
+    grid-column: 1 / 2;
+    grid-row: 1 / 10;
+}
+.item2
+{
+    grid-column: 2 / 2;
+    grid-row: 1 / span 10;
+}
+.item3
+{
+    grid-column: 1 / 2;
+    grid-row: 10 / 10    ;
+}
+
+
+
+.sidebar
+{
+    background-color: #501616;
+    padding: 10px;
+    font-size: 15px;
+    grid-row: 1 / 2;
+}
+
+.profile-container
+{
+    
+    grid-row: 2 / 3;
+    background-color: red;
+    font-size: 15px;
+}

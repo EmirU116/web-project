@@ -1,9 +1,4 @@
-.App, html, body {
-  justify-content: center;
-  display: flex;
-  height: 100%;
-  width: 221dvh;
-}
+
 
 .App-logo {
   height: 40vmin;

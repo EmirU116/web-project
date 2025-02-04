@@ -62,8 +62,13 @@ export default function StartPage() {
 
   // Render the component
   return (
-    <div>
-      <div className='textDiv'>
+    <div className='grid-container'>
+      <div className='item1'>1</div>
+      <div className='item2'>2</div>
+      <div className='item3'>3</div>
+      <div className='item4'>4</div>
+      
+        {/* <div className='textDiv'>
         <div className='chat'>
           {messages.map((msg, index) => (
             <div key={index} className={msg.username === username ? 'message local' : 'message'}>
@@ -79,7 +84,7 @@ export default function StartPage() {
           value={inputMessage}
         />
         <button onClick={sendMessage}>SEND</button>
-      </div>
+      </div> */}
     </div>
   );
 }
