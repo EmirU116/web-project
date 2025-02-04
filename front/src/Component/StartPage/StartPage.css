@@ -36,3 +36,15 @@ div
     background-color: darkcyan;
 }
 
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    text-align: left; /* Align text to the left for remote client */
+  }
+  
+  .message.local {
+    background-color: #d1ffd1; /* Different background color for local client */
+    text-align: right; /* Align text to the right for local client */
+  }

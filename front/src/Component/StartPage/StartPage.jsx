@@ -59,7 +59,7 @@ export default function StartPage() {
       <div className='textDiv'>
         <div className='chat'>
           {messages.map((msg, index) => (
-            <div key={index} className='message'>
+            <div key={index} className={msg.username === username ? 'message local' : 'message'}>
               <strong>{msg.username}: </strong>{msg.message}
             </div>
           ))}
