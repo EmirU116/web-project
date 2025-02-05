@@ -2,13 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 
 
-import StartPage from './Component/StartPage/StartPage'
+import StartPage from './Component/StartPage/StartPage';
+import CreateUser from './Component/profile/create/createUser';
 
 
 function App() {
   return (
-    <div className="App">
-        <StartPage/>
+    <div>
+      <CreateUser />
     </div>
   );
 }
