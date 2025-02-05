@@ -10,7 +10,24 @@ export default function CreateUser() {
         setUsername(e.target.value);
     };
 
+    // Function for saving the username
     const UserCreation = () => {
+        if(!username.trim()){
+            alert('Username cannot be empty');
+            return;
+        }
+
+        // Get stored user or empty array
+        const user = JSON.parse(localStorage.getItem('user')) || [];
+        
+        if(user.includes(username)){
+            alert('Username already exists');
+            return;
+        }
+
+        user.push(username);
+        localStorage.setItem('user', JSON.stringify(user));
+
         alert('User Created');
         setUsername('');
     };
