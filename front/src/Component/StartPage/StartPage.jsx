@@ -8,6 +8,7 @@ const socket = io('http://localhost:4000');
 
 // Define the StartPage component
 export default function StartPage() {
+
   // State to hold the input message
   const [inputMessage, setInputMessage] = useState("");
   // State to hold the list of messages
@@ -48,11 +49,14 @@ export default function StartPage() {
 
   // Function to send a message
   function sendMessage() {
+
       if (inputMessage.trim() !== "") {
-        // Create a message object with the username and message
+        // Create a message object with the username and message - basically where you send the message
+        // the data that you want to include, adds in messageData as an object
         const messageData = {
           username: username,
-          message: inputMessage
+          message: inputMessage,
+          time: new Date().toLocaleTimeString()
         };
         // Emit the message to the server
         socket.emit('send_message', messageData);
@@ -85,7 +89,8 @@ export default function StartPage() {
           <div className='chat'>
             {messages.map((msg, index) => (
               <div key={index} className={msg.username === username ? 'message local' : 'message'}>
-                <strong>{msg.username}: </strong>{msg.message}
+                <strong>{msg.username}: </strong>{msg.message} 
+                <p>{msg.time}</p> {/* displays current time by accesing msg.<data> */}
               </div>
             ))}
           </div>
