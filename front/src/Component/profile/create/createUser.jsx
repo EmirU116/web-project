@@ -20,11 +20,13 @@ export default function CreateUser() {
         // Get stored user or empty array
         const user = JSON.parse(localStorage.getItem('user')) || [];
         
+        // Checks if username already exists
         if(user.includes(username)){
             alert('Username already exists');
             return;
         }
-
+        
+        // Updates the user array with the new username
         user.push(username);
         localStorage.setItem('user', JSON.stringify(user));
 
