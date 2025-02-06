@@ -17,9 +17,17 @@ export default function StartPage() {
 
   // useEffect hook to run once when the component mounts
   useEffect(() => {
-    // Assign a unique username to each client
-    const clientNumber = Math.floor(Math.random() * 1000);
-    setUsername(`Client ${clientNumber}`);
+    
+    const LoggedInUser = localStorage.getItem('loggedInUser');
+    if(LoggedInUser){
+      const displayLoggedInUser = LoggedInUser;
+      setUsername(displayLoggedInUser);
+    }
+    else{
+      // Assign a unique username to each client
+      const clientNumber = Math.floor(Math.random() * 1000);
+      setUsername(`Client ${clientNumber}`);
+    }
 
     // Listen for 'message' events from the server
     socket.on('message', (data) => {
@@ -89,7 +97,9 @@ export default function StartPage() {
             value={inputMessage}
           />
       </div>
-      <div className='item3'>3</div>
+      <div className='item3'>3
+        <p>{username}</p>
+      </div>
       <div className='item4'>4</div>
       
     </div>
