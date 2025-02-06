@@ -18,6 +18,7 @@ export default function Login() {
             setLoginStatus('Login Successful');
             localStorage.setItem('loggedInUser', username);
             navigate('/');
+            window.location.reload();
         }
         else{
             alert('User does not exist, please sign up');
