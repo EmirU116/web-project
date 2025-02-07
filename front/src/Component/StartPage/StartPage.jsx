@@ -17,6 +17,9 @@ export default function StartPage() {
   // State to hold the username
   const [username, setUsername] = useState("");
 
+  // User Status 
+  const [userActivity, setuserActivity] = useState("online");
+
   // useEffect hook to run once when the component mounts
   useEffect(() => {
     
@@ -40,6 +43,26 @@ export default function StartPage() {
     // Cleanup function to remove the event listener when the component unmounts
     return () => {
       socket.off('message');
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleUserStatus = () => {
+      setuserActivity('online');
+      clearTimeout(inactiveTimer);
+      inactiveTimer = setTimeout(() => 
+        setuserActivity('away'), 5000);
+    };
+
+    let inactiveTimer = setTimeout(() => setuserActivity('away'), 5000);
+
+    window.addEventListener('mousemove', handleUserStatus);
+    window.addEventListener('keydown', handleUserStatus);
+
+    return () => {
+      window.removeEventListener('mousemove', handleUserStatus);
+      window.removeEventListener('keydown', handleUserStatus);
+      clearTimeout(inactiveTimer);
     };
   }, []);
 
@@ -77,14 +100,12 @@ export default function StartPage() {
   return (
     <div className='grid-container'>
       <div className='item1'>1
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
-        <li>test</li>
+        <li><button>User</button></li>
+        <li><button>User</button></li>
+        <li><button>User</button></li>
+        <li><button>User</button></li>
+        <li><button>User</button></li>
+        <li><button>User</button></li>
       </div>
       <div className='item2'>
           <div className='chat'>
@@ -105,6 +126,7 @@ export default function StartPage() {
       </div>
       <div className='item3'>
         <Avatar name={username} size='70' round={true} />
+        <li className={`userStatus ${userActivity}`}>online</li>
       </div>
       <div className='item4'>4</div>
       

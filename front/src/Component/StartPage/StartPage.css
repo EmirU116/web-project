@@ -88,3 +88,12 @@ text-align: right; /* Align text to the right for local client */
 
 
 
+.userStatus.online::marker
+{
+    color: green;
+}
+
+.userStatus.away::marker
+{
+    color: rgb(221, 221, 101);
+}
