@@ -126,7 +126,7 @@ export default function StartPage() {
       </div>
       <div className='item3'>
         <Avatar name={username} size='70' round={true} />
-        <li className={`userStatus ${userActivity}`}>online</li>
+        <li className={`userStatus ${userActivity}`}>{userActivity}</li>
       </div>
       <div className='item4'>4</div>
       
