@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import './StartPage.css'; // Import CSS for styling
+import Avatar from 'react-avatar';
 
 // Initialize socket connection to the server
 const socket = io('http://localhost:4000');
@@ -102,8 +103,8 @@ export default function StartPage() {
             value={inputMessage}
           />
       </div>
-      <div className='item3'>3
-        <p>{username}</p>
+      <div className='item3'>
+        <Avatar name={username} size='70' round={true} />
       </div>
       <div className='item4'>4</div>
       
