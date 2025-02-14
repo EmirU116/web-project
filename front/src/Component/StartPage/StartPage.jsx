@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef, use} from 'react';
 import io from 'socket.io-client';
 import './StartPage.css';
 import Avatar from 'react-avatar';
@@ -97,6 +97,7 @@ export default function StartPage() {
       sendMessage();
     }
   };
+
 
   return (
     <div className='grid-container'>
