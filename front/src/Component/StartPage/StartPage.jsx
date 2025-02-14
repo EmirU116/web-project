@@ -12,6 +12,7 @@ export default function StartPage() {
   const [username, setUsername] = useState("");
   const [userActivity, setUserActivity] = useState("online");
   const [chatRooms, setChatRooms] = useState([]);
+  const [serverName, setServerName] = useState("");
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedInUser');
@@ -37,12 +38,14 @@ export default function StartPage() {
       const response = await fetch('http://localhost:4000/create_server', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: `Chat Room ${chatRooms.length + 1}`, owner: username })
+        body: JSON.stringify({ name: serverName, owner: username })
       });
-  
+      window.location.reload();
       if (response.ok) {
         const newServer = await response.json();
+        chatservername(serverName);
         setChatRooms((prev) => [...prev, newServer]); // Add new server to list
+       
       } else {
         console.error('Error:', response.statusText);
       }
@@ -50,6 +53,10 @@ export default function StartPage() {
       console.error('Error:', error);
     }
   };
+
+  function chatservername(e){
+    setServerName(e.target.value);
+  }
   
   // Function to fetch chat servers (update this too)
   const fetchChatRooms = async () => {
@@ -96,6 +103,7 @@ export default function StartPage() {
       {/* Sidebar - User List */}
       <div className='item1'>
         <h3>Users</h3>
+        <input placeholder="Server Name" onChange={chatservername} value={serverName}/>
         <button onClick={createChatServer}>Create Chat</button>
       </div>
 
@@ -132,8 +140,9 @@ export default function StartPage() {
             <li>No servers</li>
           ) : (
             chatRooms.map((server) => (
-              <li key={server.id}>
-                {server.name} (Owner: {server.owner})
+              <li className="lobbynames" key={server.id}>
+                <p>{server.name}</p> 
+                <a>Owner: {server.owner}</a>
               </li>
             ))
           )}
