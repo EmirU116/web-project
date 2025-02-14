@@ -14,6 +14,9 @@ export default function StartPage() {
   const [chatRooms, setChatRooms] = useState([]);
   const [serverName, setServerName] = useState("");
 
+  const lastitemRef = useRef(null); // Create a reference to the last message
+  const scrollContainerRef = useRef(null); // Create a reference to the chat container
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
@@ -72,12 +75,11 @@ export default function StartPage() {
       console.error('Error:', error);
     }
   };
-  
   // Call fetchChatRooms() inside useEffect when component mounts
   useEffect(() => {
     fetchChatRooms();
   }, []);
-  
+
   // Handle sending messages
   const sendMessage = () => {
     if (inputMessage.trim() !== "") {
@@ -98,6 +100,13 @@ export default function StartPage() {
     }
   };
 
+  // Scroll to the last message when a new message is received
+  useEffect(() => {
+    if (lastitemRef.current) {
+      lastitemRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [messages]);
+
 
   return (
     <div className='grid-container'>
@@ -110,9 +119,13 @@ export default function StartPage() {
 
       {/* Chat Messages Section */}
       <div className='item2'>
-        <div className='chat'>
+        <div ref={scrollContainerRef} className='chat'>
           {messages.map((msg, index) => (
-            <div key={index} className={msg.username === username ? 'message local' : 'message'}>
+            <div 
+              ref={index === messages.length - 1 ? lastitemRef : null}
+              key={index} 
+              className={msg.username === username ? 'message local' : 'message'}
+              >
               <strong>{msg.username}: </strong>{msg.message} 
               <p>{msg.time}</p>
             </div>
@@ -136,18 +149,21 @@ export default function StartPage() {
       {/* List of Chat Rooms */}
       <div className='item4'>
         <h3>Chat Rooms</h3>
-        <ul>
-          {chatRooms.length === 0 ? (
-            <li>No servers</li>
-          ) : (
-            chatRooms.map((server) => (
-              <li className="lobbynames" key={server.id}>
-                <p>{server.name}</p> 
-                <a>Owner: {server.owner}</a>
-              </li>
-            ))
-          )}
-        </ul>
+        <div className='chatroomsBox'>
+
+          <ul>
+            {chatRooms.length === 0 ? (
+              <li>No servers</li>
+            ) : (
+              chatRooms.map((server) => (
+                <li className="lobbynames" key={server.id}>
+                  <p>{server.name}</p> 
+                  <a>Owner: {server.owner}</a>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );

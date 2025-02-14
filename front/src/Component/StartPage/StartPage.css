@@ -75,6 +75,11 @@ text-align: right; /* Align text to the right for local client */
     grid-column: 2 / 2;
     grid-row: 1 / span var(--max-rows);
 }
+
+.item2 .chat
+{
+    overflow-y: auto;
+}
 .item3
 {
     grid-column: 1 / 2;
@@ -111,4 +116,9 @@ text-align: right; /* Align text to the right for local client */
 
 .item4 li a {
     font-size: 15px;
+}
+
+.item4
+{
+    overflow-y: auto;
 }
