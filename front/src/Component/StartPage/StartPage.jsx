@@ -159,6 +159,9 @@ export default function StartPage() {
                 <li className="lobbynames" key={server.id}>
                   <p>{server.name}</p> 
                   <a>Owner: {server.owner}</a>
+                  <div>
+                    <button>Join</button>
+                  </div>
                 </li>
               ))
             )}
