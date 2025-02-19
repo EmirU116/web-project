@@ -160,12 +160,17 @@ export default function StartPage() {
                   <p>{server.name}</p> 
                   <a>Owner: {server.owner}</a>
                   <div>
-                    <button>Join</button>
+                    {username === server.owner ? (
+                      <button>Not Workign</button>
+                      
+                    ):(
+                      <button>Join</button>
+                    )}
                   </div>
                 </li>
               ))
             )}
-          </ul>
+         </ul>
         </div>
       </div>
     </div>
