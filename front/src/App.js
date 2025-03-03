@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react';
 import StartPage from './Component/StartPage/StartPage';
 import CreateUser from './Component/profile/create/createUser';
 import Login from './Component/profile/loginfolder/login';
+import MainPage from './Component/frontpage/newfront';
+
+
 
 function App() {
   const [isLoggedIn, SetIsLoggedIn] = useState(false);
@@ -33,12 +36,12 @@ function App() {
       <nav>
         {isLoggedIn ? (
           <>
-            <Link to="/">StartPage</Link>
+            <Link to="/">StartPage</Link> | <Link to="/mainpage">New Main</Link>
             <button onClick={handleLogout}>Logout</button>
           </>
         ) : ( 
           <>
-            <Link to="/signup">SignUp</Link> | <Link to="/login">Login</Link> | <Link to="/">StartPage</Link>
+            <Link to="/mainpage">New Main</Link> | <Link to="/signup">SignUp</Link> | <Link to="/login">Login</Link> | <Link to="/">StartPage</Link>
           </>
         )}
       </nav>
@@ -46,6 +49,7 @@ function App() {
         <Route path="/signup" element={<CreateUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<StartPage />} />
+        <Route path="/mainpage" element={<MainPage />} />
       </Routes>
 
     </Router>
